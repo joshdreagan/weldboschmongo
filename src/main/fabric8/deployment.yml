@@ -1,0 +1,43 @@
+spec:
+  template:
+    spec:
+      serviceAccountName: weldboschmongo-sa
+      containers:
+      - name: weldboschmongo
+        env:
+        - name: SPRING_CONFIG_LOCATION
+          value: file:/etc/config/
+        - name: SPRING_ACTIVEMQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: weldboschmongo-secret
+              key: spring.activemq.user
+        - name: SPRING_ACTIVEMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: weldboschmongo-secret
+              key: spring.activemq.password
+        - name: SPRING_DATA_MONGODB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: weldboschmongo-secret
+              key: spring.data.mongodb.username
+        - name: SPRING_DATA_MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: weldboschmongo-secret
+              key: spring.data.mongodb.password
+        resources:
+          requests:
+            cpu: "0.2"
+          limits:
+            cpu: "4.0"
+        volumeMounts:
+        - name: weldboschmongo-configmap-vol
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: weldboschmongo-configmap-vol
+        configMap:
+          name: weldboschmongo-configmap
+            

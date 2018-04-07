@@ -1,0 +1,8 @@
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: weldboschmongo-configmap
+data:
+  application.properties: |-
+    spring.activemq.broker-url: tcp://activemq.weldbosch.svc:61616
+    spring.data.mongodb.uri: mongodb://10.44.249.125:27017,10.44.249.126:27017,10.44.249.127:27017

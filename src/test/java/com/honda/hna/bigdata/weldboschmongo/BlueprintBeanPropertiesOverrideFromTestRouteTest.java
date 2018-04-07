@@ -2,12 +2,13 @@ package com.honda.hna.bigdata.weldboschmongo;
 
 import java.util.Dictionary;
 
-import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
+//import org.apache.camel.test.blueprint.CamelBlueprintTestSupport;
 
-import org.junit.Test;
+//import org.junit.Test;
 
-public class BlueprintBeanPropertiesOverrideFromTestRouteTest extends CamelBlueprintTestSupport {
+public class BlueprintBeanPropertiesOverrideFromTestRouteTest /*extends CamelBlueprintTestSupport*/ {
 	
+  /*
     @Override
     protected String getBlueprintDescriptor() {
         return "/OSGI-INF/blueprint/blueprint-bean.xml";
@@ -31,5 +32,5 @@ public class BlueprintBeanPropertiesOverrideFromTestRouteTest extends CamelBluep
         // assert expectations
         assertMockEndpointsSatisfied();
     }
-
+*/
 }
