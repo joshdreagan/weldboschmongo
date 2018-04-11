@@ -39,15 +39,6 @@ public class ApplicationTest {
   @Before
   public void adviceRoutes() throws Exception {
     if (!adviced.get()) {
-      camelContext.getRouteDefinition("sim").adviceWith((ModelCamelContext) camelContext, new AdviceWithRouteBuilder() {
-        @Override
-        public void configure() throws Exception {
-          weaveByToString("To\\[jms\\:.*")
-            .replace()
-              .to("direct:weldBoschIngest")
-          ;
-        }
-      });
       camelContext.getRouteDefinition("weldBoschIngest").adviceWith((ModelCamelContext) camelContext, new AdviceWithRouteBuilder() {
         @Override
         public void configure() throws Exception {
