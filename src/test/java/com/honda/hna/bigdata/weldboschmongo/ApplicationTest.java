@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
+import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
@@ -30,6 +31,9 @@ public class ApplicationTest {
   @EndpointInject(uri = "mock:mongodb")
   private MockEndpoint mongodb;
   
+  @Autowired
+  private ProducerTemplate producer;
+  
   private static final AtomicBoolean adviced = new AtomicBoolean(false);
   
   @BeforeClass
@@ -55,8 +59,9 @@ public class ApplicationTest {
   
   @Test
   public void test() throws Exception {
+    producer.sendBody("direct:weldBoschIngest", "{ \"protRecord_ID\": \"0\" }");
     
-    mongodb.expectedMessageCount(5);
-    MockEndpoint.assertWait(30, TimeUnit.SECONDS, mongodb);
+    mongodb.expectedMessageCount(1);
+    mongodb.assertIsSatisfied(5000L);
   }
 }

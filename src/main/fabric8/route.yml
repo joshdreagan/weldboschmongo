@@ -1,8 +1,0 @@
-metadata:
-  name: weldboschmongo
-spec:
-  port:
-    targetPort: http
-  to:
-    kind: Service
-    name: weldboschmongo
